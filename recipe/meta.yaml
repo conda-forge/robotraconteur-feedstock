@@ -1,13 +1,13 @@
 {% set name = "robotraconteur" %}
-{% set version = "0.18.0" %}
+{% set version = "1.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/robotraconteur/robotraconteur/archive/refs/tags/v0.18.0.tar.gz
-    sha256: 'f76b6a1a34a9e64279ac1106c4fd6ef19c9048ae1ab2a1331db224f4c3dcd6f6'
+  - url: https://github.com/robotraconteur/robotraconteur/archive/refs/tags/v1.0.0.tar.gz
+    sha256: '94c6ca93f2bdfaa9dc41bb439e9da97b395c520d56fb4f19451c12e9ef7b3bbe'
   - url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.56.tar.xz  # [linux]
     sha256: 59c4dba9fc8aae2a6a5f8f12f19bc1b0c2dc27355c7ca3123eed3fe6bd7d0b9d  # [linux]
     folder: bluez-src  # [linux]
