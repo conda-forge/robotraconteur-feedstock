@@ -1,5 +1,5 @@
 {% set name = "robotraconteur" %}
-{% set version = "1.1.1" %}
+{% set version = "1.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,15 +7,15 @@ package:
 
 source:
   - url: https://github.com/robotraconteur/robotraconteur/archive/v{{ version }}.tar.gz
-    sha256: cb10ab7dd7d4416187aa985afbbf0ee23feb520cb00781fd4f93fc5f063f9832
+    sha256: e7102fbf8a2ffdf8ee0d188b9c3b7154e5950d60a670466640c51011b997104c
   - url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.56.tar.xz  # [linux]
     sha256: 59c4dba9fc8aae2a6a5f8f12f19bc1b0c2dc27355c7ca3123eed3fe6bd7d0b9d  # [linux]
     folder: bluez-src  # [linux]
 
 build:
-  number: 2
+  number: 0
   run_exports:
-  - {{ pin_subpackage(name, min_pin='x.x', max_pin='x.x') }}
+    - {{ pin_subpackage(name, min_pin='x.x', max_pin='x.x') }}
 
 requirements:
   build:
@@ -31,7 +31,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - pip                                    # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
-  host:    
+  host:
     - libboost-devel
     - python
     - pip
