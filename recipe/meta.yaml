@@ -37,6 +37,7 @@ requirements:
     - libboost-devel
     - python
     - pip
+    - setuptools
     - numpy
     - dbus  # [linux]
     - zlib  # [linux]
