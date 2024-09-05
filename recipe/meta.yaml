@@ -15,7 +15,7 @@ source:
     folder: bluez-src  # [linux]
 
 build:
-  number: 2
+  number: 3
   run_exports:
     - {{ pin_subpackage(name, min_pin='x.x') }}
 
@@ -37,6 +37,7 @@ requirements:
     - libboost-devel
     - python
     - pip
+    - setuptools
     - numpy
     - dbus  # [linux]
     - zlib  # [linux]
