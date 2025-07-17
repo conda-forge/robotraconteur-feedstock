@@ -90,6 +90,7 @@ outputs:
         - numpy
         - setuptools
         - libboost-devel
+        - pip
 
       run:
         - {{ pin_subpackage("robotraconteur-cpp", min_pin='x.x') }}
