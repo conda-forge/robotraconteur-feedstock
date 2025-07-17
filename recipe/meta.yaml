@@ -46,6 +46,7 @@ outputs:
         - make  # [unix]
         - git
         - cmake
+        - swig
       host:
         - libboost-devel
         - dbus  # [linux]
