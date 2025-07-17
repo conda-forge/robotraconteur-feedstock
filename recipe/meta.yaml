@@ -32,8 +32,8 @@ requirements:
 
 outputs:
   - name: robotraconteur-cpp
-    script: build_cpp.sh # [unix]
-    script: bld_cpp.bat # [win]
+    script: build_cpp.sh  # [unix]
+    script: bld_cpp.bat  # [win]
     build:
       run_exports:
         - {{ pin_subpackage("robotraconteur-cpp", min_pin='x.x') }}
@@ -63,8 +63,8 @@ outputs:
         - if exist %PREFIX%\\Library\\bin\\RobotRaconteurCore.dll (exit 0) else (exit 1)  # [win]
 
   - name: robotraconteur-python
-    script: build_py.sh # [unix]
-    script: bld_py.bat # [win]
+    script: build_py.sh  # [unix]
+    script: bld_py.bat  # [win]
 
     build:
       run_exports:
