@@ -20,5 +20,5 @@ cmake -DBUILD_TESTING=OFF -DBUILD_GEN=ON \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_INSTALL_LIBDIR=lib -DBUILD_SHARED_LIBS:BOOL=ON  ${CMAKE_ARGS} ..
 
-cmake --build . --config Release -- -j$CPU_COUNT
+cmake --build . --config Release -- -j2
 cmake --build . --config Release --target install

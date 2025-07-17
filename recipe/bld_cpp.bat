@@ -9,7 +9,7 @@ cmake -GNinja -DBUILD_TESTING=OFF -DBUILD_DOCUMENTATION=OFF -DBUILD_GEN=ON ^
   %CMAKE_ARGS% ^
   ..
 if %errorlevel% neq 0 exit /b %errorlevel%
-cmake --build . --config Release -j 4
+cmake --build . --config Release -j 2
 if %errorlevel% neq 0 exit /b %errorlevel%
 cmake --build . --config Release --target install
 if %errorlevel% neq 0 exit /b %errorlevel%

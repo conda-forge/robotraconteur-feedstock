@@ -9,7 +9,7 @@ cmake -GNinja -DBUILD_TESTING=OFF -DBUILD_DOCUMENTATION=OFF -DBUILD_GEN=OFF -DBU
   %CMAKE_ARGS% ^
   ..
 if %errorlevel% neq 0 exit /b %errorlevel%
-cmake --build . --config Release -j 4
+cmake --build . --config Release -j 2
 if %errorlevel% neq 0 exit /b %errorlevel%
 cd out\Python3 
 if %errorlevel% neq 0 exit /b %errorlevel%

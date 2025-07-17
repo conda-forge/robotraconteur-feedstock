@@ -20,6 +20,6 @@ cmake -DBUILD_TESTING=OFF -DBUILD_GEN=OFF -DBUILD_PYTHON3=ON \
     -DCMAKE_INSTALL_PREFIX=${PREFIX} \
     -DCMAKE_INSTALL_LIBDIR=lib -DBUILD_SHARED_LIBS:BOOL=ON  ${CMAKE_ARGS} ..
 
-cmake --build . --config Release -- -j$CPU_COUNT
+cmake --build . --config Release -- -j2
 cd out/Python3
 $PYTHON -m pip install --no-deps --ignore-installed . -vv
