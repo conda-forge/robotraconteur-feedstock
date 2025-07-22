@@ -391,9 +391,8 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-librobotraconteur-green.svg)](https://anaconda.org/conda-forge/librobotraconteur) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/librobotraconteur.svg)](https://anaconda.org/conda-forge/librobotraconteur) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/librobotraconteur.svg)](https://anaconda.org/conda-forge/librobotraconteur) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/librobotraconteur.svg)](https://anaconda.org/conda-forge/librobotraconteur) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-robotraconteur-green.svg)](https://anaconda.org/conda-forge/robotraconteur) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/robotraconteur.svg)](https://anaconda.org/conda-forge/robotraconteur) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/robotraconteur.svg)](https://anaconda.org/conda-forge/robotraconteur) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/robotraconteur.svg)](https://anaconda.org/conda-forge/robotraconteur) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-robotraconteur--cpp-green.svg)](https://anaconda.org/conda-forge/robotraconteur-cpp) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/robotraconteur-cpp.svg)](https://anaconda.org/conda-forge/robotraconteur-cpp) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/robotraconteur-cpp.svg)](https://anaconda.org/conda-forge/robotraconteur-cpp) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/robotraconteur-cpp.svg)](https://anaconda.org/conda-forge/robotraconteur-cpp) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-robotraconteur--python-green.svg)](https://anaconda.org/conda-forge/robotraconteur-python) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/robotraconteur-python.svg)](https://anaconda.org/conda-forge/robotraconteur-python) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/robotraconteur-python.svg)](https://anaconda.org/conda-forge/robotraconteur-python) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/robotraconteur-python.svg)](https://anaconda.org/conda-forge/robotraconteur-python) |
 
 Installing robotraconteur
 =========================
@@ -405,41 +404,41 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `robotraconteur, robotraconteur-cpp, robotraconteur-python` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `librobotraconteur, robotraconteur` can be installed with `conda`:
 
 ```
-conda install robotraconteur robotraconteur-cpp robotraconteur-python
-```
-
-or with `mamba`:
-
-```
-mamba install robotraconteur robotraconteur-cpp robotraconteur-python
-```
-
-It is possible to list all of the versions of `robotraconteur` available on your platform with `conda`:
-
-```
-conda search robotraconteur --channel conda-forge
+conda install librobotraconteur robotraconteur
 ```
 
 or with `mamba`:
 
 ```
-mamba search robotraconteur --channel conda-forge
+mamba install librobotraconteur robotraconteur
+```
+
+It is possible to list all of the versions of `librobotraconteur` available on your platform with `conda`:
+
+```
+conda search librobotraconteur --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search librobotraconteur --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search robotraconteur --channel conda-forge
+mamba repoquery search librobotraconteur --channel conda-forge
 
-# List packages depending on `robotraconteur`:
-mamba repoquery whoneeds robotraconteur --channel conda-forge
+# List packages depending on `librobotraconteur`:
+mamba repoquery whoneeds librobotraconteur --channel conda-forge
 
-# List dependencies of `robotraconteur`:
-mamba repoquery depends robotraconteur --channel conda-forge
+# List dependencies of `librobotraconteur`:
+mamba repoquery depends librobotraconteur --channel conda-forge
 ```
 
 
