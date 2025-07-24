@@ -1,0 +1,96 @@
+From 0dd507dec43ff00d6cd4429972c142010c9c297d Mon Sep 17 00:00:00 2001
+From: John Wason <wason@wasontech.com>
+Date: Wed, 23 Jul 2025 23:53:32 -0400
+Subject: [PATCH] Fix llvm 20 clang compiler errors
+
+---
+ RobotRaconteurGen/CSharpServiceLangGen.cpp | 12 ++++++++++--
+ RobotRaconteurGen/JavaServiceLangGen.cpp   | 12 ++++++++++--
+ RobotRaconteurMex/RobotRaconteurMex.cpp    |  6 +++---
+ 3 files changed, 23 insertions(+), 7 deletions(-)
+
+diff --git a/RobotRaconteurGen/CSharpServiceLangGen.cpp b/RobotRaconteurGen/CSharpServiceLangGen.cpp
+index f4f25ad1..c4a7a527 100644
+--- a/RobotRaconteurGen/CSharpServiceLangGen.cpp
++++ b/RobotRaconteurGen/CSharpServiceLangGen.cpp
+@@ -2715,14 +2715,22 @@ static std::string CSharpServiceLangGen_EscapeString_Formatter(const boost::smat
+     if (i == "\t")
+         return "\\t";
+ 
+-    std::basic_string<uint16_t> v = boost::locale::conv::utf_to_utf<uint16_t>(i);
+-
+     std::stringstream v2;
+     v2 << std::hex << std::setfill('0');
++
++#ifndef ROBOTRACONTEUR_NO_CXX11
++    std::basic_string<char16_t> v = boost::locale::conv::utf_to_utf<char16_t>(i);
++    BOOST_FOREACH (const char16_t& v3, v)
++    {
++        v2 << std::setw(0) << "\\u" << std::setw(4) << v3;
++    }
++#else
++    std::basic_string<uint16_t> v = boost::locale::conv::utf_to_utf<uint16_t>(i);
+     BOOST_FOREACH (const uint16_t& v3, v)
+     {
+         v2 << std::setw(0) << "\\u" << std::setw(4) << v3;
+     }
++#endif
+ 
+     return v2.str();
+ }
+diff --git a/RobotRaconteurGen/JavaServiceLangGen.cpp b/RobotRaconteurGen/JavaServiceLangGen.cpp
+index 24ae3fff..19528a08 100644
+--- a/RobotRaconteurGen/JavaServiceLangGen.cpp
++++ b/RobotRaconteurGen/JavaServiceLangGen.cpp
+@@ -3046,14 +3046,22 @@ static std::string JavaServiceLangGen_EscapeString_Formatter(const boost::smatch
+     if (i == "\t")
+         return "\\t";
+ 
+-    std::basic_string<uint16_t> v = boost::locale::conv::utf_to_utf<uint16_t>(i);
+-
+     std::stringstream v2;
+     v2 << std::hex << std::setfill('0');
++
++#ifndef ROBOTRACONTEUR_NO_CXX11
++    std::basic_string<char16_t> v = boost::locale::conv::utf_to_utf<char16_t>(i);
++    BOOST_FOREACH (const char16_t& v3, v)
++    {
++        v2 << std::setw(0) << "\\u" << std::setw(4) << v3;
++    }
++#else
++    std::basic_string<uint16_t> v = boost::locale::conv::utf_to_utf<uint16_t>(i);
+     BOOST_FOREACH (const uint16_t& v3, v)
+     {
+         v2 << std::setw(0) << "\\u" << std::setw(4) << v3;
+     }
++#endif
+ 
+     return v2.str();
+ }
+diff --git a/RobotRaconteurMex/RobotRaconteurMex.cpp b/RobotRaconteurMex/RobotRaconteurMex.cpp
+index 37262ede..5696b463 100644
+--- a/RobotRaconteurMex/RobotRaconteurMex.cpp
++++ b/RobotRaconteurMex/RobotRaconteurMex.cpp
+@@ -3452,8 +3452,8 @@ class UnpackMessageElementToMxArrayImpl
+         if (tdef->Type == DataTypes_string_t)
+         {
+             RR_INTRUSIVE_PTR<RRArray<char> > m_str = m->CastData<RRArray<char> >();
+-            std::basic_string<uint16_t> data_utf16 =
+-                boost::locale::conv::utf_to_utf<uint16_t>(m_str->data(), m_str->data() + m_str->size());
++            std::basic_string<char16_t> data_utf16 =
++                boost::locale::conv::utf_to_utf<char16_t>(m_str->data(), m_str->data() + m_str->size());
+ 
+             mwSize data_size[2];
+             data_size[0] = 1;
+@@ -7289,7 +7289,7 @@ constant_type convert_constant(const RR_SHARED_PTR<ConstantDefinition>& c1,
+     if (def->Type == DataTypes_string_t)
+     {
+         std::string data_utf8 = c1->ValueToString();
+-        std::basic_string<uint16_t> data_utf16 = boost::locale::conv::utf_to_utf<uint16_t>(data_utf8);
++        std::basic_string<char16_t> data_utf16 = boost::locale::conv::utf_to_utf<char16_t>(data_utf8);
+ 
+         mwSize data_size[2];
+         data_size[0] = 1;
+-- 
+2.39.5 (Apple Git-154)
+
