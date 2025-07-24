@@ -1,5 +1,5 @@
-About librobotraconteur-feedstock
-=================================
+About robotraconteur-suite-feedstock
+====================================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/robotraconteur-feedstock/blob/main/LICENSE.txt)
 
@@ -219,10 +219,10 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-librobotraconteur-green.svg)](https://anaconda.org/conda-forge/librobotraconteur) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/librobotraconteur.svg)](https://anaconda.org/conda-forge/librobotraconteur) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/librobotraconteur.svg)](https://anaconda.org/conda-forge/librobotraconteur) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/librobotraconteur.svg)](https://anaconda.org/conda-forge/librobotraconteur) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-robotraconteur-green.svg)](https://anaconda.org/conda-forge/robotraconteur) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/robotraconteur.svg)](https://anaconda.org/conda-forge/robotraconteur) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/robotraconteur.svg)](https://anaconda.org/conda-forge/robotraconteur) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/robotraconteur.svg)](https://anaconda.org/conda-forge/robotraconteur) |
 
-Installing librobotraconteur
-============================
+Installing robotraconteur-suite
+===============================
 
-Installing `librobotraconteur` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `robotraconteur-suite` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -308,17 +308,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating librobotraconteur-feedstock
-====================================
+Updating robotraconteur-suite-feedstock
+=======================================
 
-If you would like to improve the librobotraconteur recipe or build a new
+If you would like to improve the robotraconteur-suite recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/librobotraconteur-feedstock are
+Note that all branches in the conda-forge/robotraconteur-suite-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
