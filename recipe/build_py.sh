@@ -8,8 +8,8 @@ if [[ "$target_platform" == linux-* ]]; then
     export CXXFLAGS="$CXXFLAGS -I$SRC_DIR/bluez/include"
 fi
 
-mkdir -p build2
-cd build2
+mkdir -p build3
+cd build3
 
 cmake -DBUILD_TESTING=OFF -DBUILD_GEN=OFF -DBUILD_PYTHON3=ON \
     -DBUILD_CORE=OFF \
