@@ -1,58 +1,101 @@
-{% set name = "robotraconteur" %}
-{% set version = "1.2.4" %}
+{% set version = "1.2.5" %}
 
 package:
-  name: {{ name|lower }}
+  name: robotraconteur-suite
   version: {{ version }}
 
 source:
   - url: https://github.com/robotraconteur/robotraconteur/archive/v{{ version }}.tar.gz
-    sha256: a1ccf96c6b40291e46f385dc35ffdbb8157d0375f8e8f7902d14810ad8ca798c
+    sha256: 3dd5e6a90032cc97089177a3525bd322b479333a87a6021ac9cc9e0a4d124fdf
   - url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.56.tar.xz  # [linux]
     sha256: 59c4dba9fc8aae2a6a5f8f12f19bc1b0c2dc27355c7ca3123eed3fe6bd7d0b9d  # [linux]
     folder: bluez-src  # [linux]
 
 build:
   number: 0
-  run_exports:
-    - {{ pin_subpackage(name, min_pin='x.x') }}
 
 requirements:
-  build:
-    - {{ compiler('c') }}
-    - {{ stdlib("c") }}
-    - {{ compiler('cxx') }}
-    - ninja  # [win]    
-    - make  # [unix]
-    - git
-    - cmake
-    - swig
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - pip                                    # [build_platform != target_platform]
-    - numpy                                  # [build_platform != target_platform]
   host:
-    - libboost-devel
-    - python
-    - pip
-    - setuptools
-    - numpy
-    - dbus  # [linux]
-    - zlib  # [linux]
-    - openssl  # [unix]
-    - libusb  # [linux]
-  run:
     - python
     - numpy
 
-test:
-  commands:
-    - test -f ${PREFIX}/include/RobotRaconteur.h  # [not win]
-    - if exist %PREFIX%\\Library\\include\\RobotRaconteur.h (exit 0) else (exit 1)  # [win]
-    - test -f ${PREFIX}/lib/libRobotRaconteurCore${SHLIB_EXT}  # [not win]
-    - if exist %PREFIX%\\Library\\lib\\RobotRaconteurCore.lib (exit 0) else (exit 1)  # [win]
-    - if exist %PREFIX%\\Library\\bin\\RobotRaconteurCore.dll (exit 0) else (exit 1)  # [win]
-    - python -c "from RobotRaconteur.Client import RRN; print(RRN.RobotRaconteurVersion)"
+outputs:
+  - name: librobotraconteur
+    script: build_cpp.sh  # [unix]
+    script: bld_cpp.bat  # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage("librobotraconteur", min_pin='x.x.x') }}
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ stdlib("c") }}
+        - {{ compiler('cxx') }}
+        - ninja  # [win]    
+        - make  # [unix]
+        - git
+        - cmake
+        - swig
+      host:
+        - libboost-devel
+        - dbus  # [linux]
+        - zlib  # [linux]
+        - openssl  # [unix]
+        - libusb  # [linux]
+
+    test:
+      commands:
+        - test -f ${PREFIX}/include/RobotRaconteur.h  # [not win]
+        - if exist %PREFIX%\\Library\\include\\RobotRaconteur.h (exit 0) else (exit 1)  # [win]
+        - test -f ${PREFIX}/lib/libRobotRaconteurCore${SHLIB_EXT}  # [not win]
+        - if exist %PREFIX%\\Library\\lib\\RobotRaconteurCore.lib (exit 0) else (exit 1)  # [win]
+        - if exist %PREFIX%\\Library\\bin\\RobotRaconteurCore.dll (exit 0) else (exit 1)  # [win]
+
+  - name: robotraconteur
+    script: build_py.sh  # [unix]
+    script: bld_py.bat  # [win]
+
+    build:
+      run_exports:
+        - {{ pin_subpackage("robotraconteur", min_pin='x.x') }}
+      force_use_keys:
+        - python
+        - numpy    
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ stdlib("c") }}
+        - {{ compiler('cxx') }}
+        - ninja  # [win]    
+        - make  # [unix]
+        - git
+        - cmake
+        - swig
+        - python                                 # [build_platform != target_platform]
+        - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+        - pip                                    # [build_platform != target_platform]
+        - numpy                                  # [build_platform != target_platform]
+      host:
+        - {{ pin_subpackage("librobotraconteur", exact=True) }}
+        - python
+        - numpy
+        - setuptools
+        - libboost-devel
+        - pip
+
+      run:
+        - {{ pin_subpackage("librobotraconteur", min_pin='x.x.x') }}
+        - python
+        - numpy
+
+    test:
+      commands:
+        - test -f ${PREFIX}/include/RobotRaconteur.h  # [not win]
+        - if exist %PREFIX%\\Library\\include\\RobotRaconteur.h (exit 0) else (exit 1)  # [win]
+        - test -f ${PREFIX}/lib/libRobotRaconteurCore${SHLIB_EXT}  # [not win]
+        - if exist %PREFIX%\\Library\\lib\\RobotRaconteurCore.lib (exit 0) else (exit 1)  # [win]
+        - if exist %PREFIX%\\Library\\bin\\RobotRaconteurCore.dll (exit 0) else (exit 1)  # [win]
+        - python -c "from RobotRaconteur.Client import RRN; print(RRN.RobotRaconteurVersion)"
 
 about:
   home: http://robotraconteur.com
