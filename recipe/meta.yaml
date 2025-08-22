@@ -12,7 +12,7 @@ source:
     folder: bluez-src  # [linux]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -107,5 +107,4 @@ about:
 extra:
   recipe-maintainers:
     - traversaro
-    - Tobias-Fischer
     - johnwason
