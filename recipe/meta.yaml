@@ -1,4 +1,4 @@
-{% set version = "1.2.5" %}
+{% set version = "1.2.6" %}
 
 package:
   name: robotraconteur-suite
@@ -6,13 +6,13 @@ package:
 
 source:
   - url: https://github.com/robotraconteur/robotraconteur/archive/v{{ version }}.tar.gz
-    sha256: 3dd5e6a90032cc97089177a3525bd322b479333a87a6021ac9cc9e0a4d124fdf
+    sha256: 2da8c9b2f98704b180576071c12cc4617dcb66eca0b6752e5027ede7b3e91347
   - url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.56.tar.xz  # [linux]
     sha256: 59c4dba9fc8aae2a6a5f8f12f19bc1b0c2dc27355c7ca3123eed3fe6bd7d0b9d  # [linux]
     folder: bluez-src  # [linux]
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -60,7 +60,7 @@ outputs:
         - {{ pin_subpackage("robotraconteur", min_pin='x.x') }}
       force_use_keys:
         - python
-        - numpy    
+        - numpy
     requirements:
       build:
         - {{ compiler('c') }}
