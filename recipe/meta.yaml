@@ -7,12 +7,14 @@ package:
 source:
   - url: https://github.com/robotraconteur/robotraconteur/archive/v{{ version }}.tar.gz
     sha256: c7bb5c31518b9aaa38ff6f2ff899fda541d8650555976a85e582b06695ad403b
+    patches:
+      - 470.patch
   - url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.56.tar.xz  # [linux]
     sha256: 59c4dba9fc8aae2a6a5f8f12f19bc1b0c2dc27355c7ca3123eed3fe6bd7d0b9d  # [linux]
     folder: bluez-src  # [linux]
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   host:
