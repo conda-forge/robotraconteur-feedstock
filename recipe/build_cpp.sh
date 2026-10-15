@@ -18,5 +18,6 @@ cmake -DBUILD_TESTING=OFF -DBUILD_GEN=ON \
     -DCMAKE_VERBOSE_MAKEFILE=ON \
     -DBUILD_SHARED_LIBS:BOOL=ON  ${CMAKE_ARGS} ..
 
+# -j2: higher parallelism runs CI builders out of memory
 cmake --build . --config Release -- -j2
 cmake --build . --config Release --target install

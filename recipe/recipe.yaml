@@ -1,0 +1,123 @@
+schema_version: 1
+
+context:
+  version: "1.2.8"
+
+recipe:
+  name: robotraconteur-suite
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/robotraconteur/robotraconteur/archive/v${{ version }}.tar.gz
+    sha256: c7bb5c31518b9aaa38ff6f2ff899fda541d8650555976a85e582b06695ad403b
+    patches:
+      - 470.patch
+  - if: linux
+    then:
+      url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.56.tar.xz
+      sha256: 59c4dba9fc8aae2a6a5f8f12f19bc1b0c2dc27355c7ca3123eed3fe6bd7d0b9d
+      target_directory: bluez-src
+
+build:
+  number: 2
+
+outputs:
+  - package:
+      name: librobotraconteur
+    build:
+      script:
+        file: build_cpp
+      dynamic_linking:
+        overlinking_behavior: error
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - ${{ compiler('cxx') }}
+        - if: win
+          then: ninja
+        - if: unix
+          then: make
+        - git
+        - cmake
+        - swig
+      host:
+        - libboost-devel
+        - if: linux
+          then:
+            - dbus
+            - zlib
+            - libusb
+        - if: unix
+          then: openssl
+      run_exports:
+        - ${{ pin_subpackage('librobotraconteur', lower_bound='x.x.x') }}
+    tests:
+      - package_contents:
+          include:
+            - RobotRaconteur.h
+          lib:
+            - RobotRaconteurCore
+
+  - package:
+      name: robotraconteur
+    build:
+      script:
+        file: build_py
+      dynamic_linking:
+        overlinking_behavior: error
+      variant:
+        use_keys:
+          - python
+          - numpy
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ stdlib('c') }}
+        - ${{ compiler('cxx') }}
+        - if: win
+          then: ninja
+        - if: unix
+          then: make
+        - git
+        - cmake
+        - swig
+        - if: build_platform != target_platform
+          then:
+            - python
+            - cross-python_${{ target_platform }}
+            - pip
+            - numpy
+      host:
+        - ${{ pin_subpackage('librobotraconteur', exact=True) }}
+        - python
+        - numpy
+        - setuptools
+        - libboost-devel
+        - pip
+      run:
+        - ${{ pin_subpackage('librobotraconteur', lower_bound='x.x.x') }}
+        - python
+        - numpy
+      run_exports:
+        - ${{ pin_subpackage('robotraconteur', lower_bound='x.x') }}
+    tests:
+      - python:
+          imports:
+            - RobotRaconteur
+            - RobotRaconteur.Client
+          pip_check: false
+      - script:
+          - python -c "from RobotRaconteur.Client import RRN; print(RRN.RobotRaconteurVersion)"
+
+about:
+  homepage: http://robotraconteur.com
+  repository: https://github.com/robotraconteur/robotraconteur
+  license: Apache-2.0
+  license_file: LICENSE.txt
+  summary: Communication framework for robotics and automation
+
+extra:
+  recipe-maintainers:
+    - traversaro
+    - johnwason
