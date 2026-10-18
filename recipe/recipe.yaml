@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.2.8"
+  version: "1.2.9"
 
 recipe:
   name: robotraconteur-suite
@@ -9,7 +9,7 @@ recipe:
 
 source:
   - url: https://github.com/robotraconteur/robotraconteur/archive/v${{ version }}.tar.gz
-    sha256: c7bb5c31518b9aaa38ff6f2ff899fda541d8650555976a85e582b06695ad403b
+    sha256: 0c47149e0db36f861fdd9e2458c6191d70d0f62b617ed736760e6150bbe8ee80
     patches:
       - 470.patch
   - if: linux
@@ -19,7 +19,7 @@ source:
       target_directory: bluez-src
 
 build:
-  number: 3
+  number: 0
 
 outputs:
   - package:
