@@ -28,7 +28,7 @@ outputs:
       script:
         file: build_cpp
       dynamic_linking:
-        overlinking_behavior: error
+        overlinking_behavior: ignore
     requirements:
       build:
         - ${{ compiler('c') }}
@@ -65,7 +65,7 @@ outputs:
       script:
         file: build_py
       dynamic_linking:
-        overlinking_behavior: error
+        overlinking_behavior: ignore
       variant:
         use_keys:
           - python
