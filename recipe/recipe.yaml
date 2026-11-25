@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "1.2.9"
+  version: "1.3.0"
 
 recipe:
   name: robotraconteur-suite
@@ -9,9 +9,7 @@ recipe:
 
 source:
   - url: https://github.com/robotraconteur/robotraconteur/archive/v${{ version }}.tar.gz
-    sha256: 0c47149e0db36f861fdd9e2458c6191d70d0f62b617ed736760e6150bbe8ee80
-    patches:
-      - 470.patch
+    sha256: e95dd52820c9aef88ebc23ea7909936347020f595d538fb152843afe454f7375
   - if: linux
     then:
       url: http://www.kernel.org/pub/linux/bluetooth/bluez-5.56.tar.xz
